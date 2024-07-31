@@ -1,48 +1,49 @@
 import 'package:flutter/material.dart';
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
+class StackPage extends StatelessWidget {
+  const StackPage({super.key});
 
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 250,
-      height: 250,
-      child: Stack(
-        children: <Widget>[
-          Container(
-            width: 250,
-            height: 250,
-            color: Colors.white,
-          ),
-          Container(
-            padding: const EdgeInsets.all(5.0),
-            alignment: Alignment.bottomCenter,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: <Color>[
-                  Colors.black.withAlpha(0),
-                  Colors.black12,
-                  Colors.black45
-                ],
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Stack"),
+      ),
+      body: Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        color: Colors.yellow,
+        child: Stack(
+          children: [
+            Container(
+              width: 150,
+              height: 200,
+              color: Colors.red,
+            ),
+            Container(
+              width: 150,
+              height: 200,
+              margin: const EdgeInsets.only(top: 50, left: 50),
+              color: Colors.blue,
+            ),
+            Positioned(
+              left: 100,
+              top: 100,
+              child: Container(
+                width: 150,
+                height: 200,
+                color: Colors.green,
               ),
             ),
-            child: const Text(
-              'Foreground Text',
-              style: TextStyle(color: Colors.white, fontSize: 20.0),
+            Container(
+              width: 150,
+              height: 200,
+              margin: const EdgeInsets.only(top: 150, left: 150),
+              color: Colors.orange,
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
-      
   }
-
 }
