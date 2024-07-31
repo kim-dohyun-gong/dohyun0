@@ -3,21 +3,21 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
+class ScrollviewPaginationPage extends StatefulWidget {
+  const ScrollviewPaginationPage({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<ScrollviewPaginationPage> createState() => _ScrollviewPaginationPageState();
 }
 
-class _MyHomePageState extends State<MyHomePage>  {
+class _ScrollviewPaginationPageState extends State<ScrollviewPaginationPage>  {
 
   final _url = 'https://jsonplaceholder.typicode.com/albums';
   int _page = 1;
   final int _limit = 20;
-  bool _hasNextPage = true; // 다음 페이지가 있는지 여부
-  bool _isFirstLoadRunning = false; // 첫번째 페이지 로딩중
-  bool _isLoadMoreRunning = false; // 다음페이지 로딩중
+  bool _hasNextPage = true;
+  bool _isFirstLoadRunning = false;
+  bool _isLoadMoreRunning = false;
   List _albumList = [];
   late ScrollController _controller;
 
@@ -57,13 +57,13 @@ class _MyHomePageState extends State<MyHomePage>  {
       });
       _page += 1;
       try {
-        final res = await http.get(Uri.parse("$_url?_page=$_page&_list=$_limit"));
+        final res = await http.get(Uri.parse("$_url?_page=$_page&_limit=$_limit"));
         final List fetchedAlbums = json.decode(res.body);
         if(fetchedAlbums.isNotEmpty) {
           setState(() {
             _albumList.addAll(fetchedAlbums);
           });
-        } else { // 데이터가 비어있는 경우
+        } else {
           setState(() {
             _hasNextPage = false;
           });
@@ -79,7 +79,6 @@ class _MyHomePageState extends State<MyHomePage>  {
     }
   }
 
-  // 페이지 종료 시 종료해 주는 기능
   @override
   void dispose() {
     super.dispose();
@@ -90,7 +89,7 @@ class _MyHomePageState extends State<MyHomePage>  {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text("test title"),
+          title: const Text("Scroll Pagination"),
         ),
         body: _isFirstLoadRunning
             ? const Center(

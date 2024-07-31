@@ -1,27 +1,48 @@
 import 'package:flutter/material.dart';
 
-class SecondView extends StatefulWidget {
-  const SecondView({super.key});
-  @override
-  State<SecondView> createState() => _SecondViewState();
-}
-class _SecondViewState extends State<SecondView> {
+class SecondViewPage extends StatelessWidget {
+  const SecondViewPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back),
-            onPressed: () => Navigator.of(context).pop(),
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+      ),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            showDialog(
+              context: context,
+              builder: (BuildContext con) {
+                return AlertDialog(
+                  title: const Text("Nya"),
+                  content: const Text("Lucky 🍀"),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.of(context).pop(),
+                      child: const Text("Ok"),
+                    ),
+                  ],
+                );
+              },
+            );
+          },
+          style: ElevatedButton.styleFrom(
+            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+          ),
+          child: const Text(
+            "Nya",
+            style: TextStyle(fontSize: 16),
           ),
         ),
-        body: Center(
-          child: Container(
-            padding: EdgeInsets.all(15),
-            color: Colors.blue,
-            child: Text("여기는 두번째 페이지입니다"),
-          ),
-        )
+      ),
     );
   }
 }

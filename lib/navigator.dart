@@ -1,35 +1,35 @@
 import 'package:flutter/material.dart';
-import 'second_view.dart';
+import 'package:flutter_ddhyn/second_view.dart';
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
+class NavigatorPage extends StatelessWidget {
+  const NavigatorPage({super.key});
 
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("네비게이터 화면"),
+        title: const Text("Navigator"),
       ),
-        body: Center(
-          child: GestureDetector(
-            onTap: () => Navigator.push(context, MaterialPageRoute(
-                builder: (_) => SecondView())
-            ),
-            child: Container(
-              padding: EdgeInsets.all(15),
-              color: Colors.blue,
-              child: Text("Get Started"),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const SecondViewPage()),
+            );
+          },
+          style: ElevatedButton.styleFrom(
+            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
             ),
           ),
-        )
-
-
-        //출처: https://juntcom.tistory.com/274 [쏘니의 개발블로그:티스토리]
+          child: const Text(
+            "Go to Second View",
+            style: TextStyle(fontSize: 16),
+          ),
+        ),
+      ),
     );
   }
 }
