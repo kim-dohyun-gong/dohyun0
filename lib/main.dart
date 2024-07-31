@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'listview.dart';
+import 'bottom_navigator.dart';
 
 void main() {
   runApp(const MyApp());
